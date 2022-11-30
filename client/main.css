@@ -1,0 +1,22 @@
+body {
+  padding: 10px;
+  font-family: sans-serif;
+}
+
+
+#progress_Status {
+  width: 50%;
+  background-color: rgb(253, 252, 252);
+}
+  
+.myprogressBar {
+  height: 35px;
+  background-color: #0d9652;
+  text-align: center;
+  line-height: 32px;
+  color: black;
+}
+
+.cacher {
+  display: none;
+}

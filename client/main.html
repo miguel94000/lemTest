@@ -1,0 +1,29 @@
+<head>
+  <title>lemtestV1</title>
+</head>
+
+<body>
+  <h1>Export Center</h1>
+
+  {{> tp_export}}
+</body>
+
+<template name="tp_export">
+  <button class="js-add-export">Exporter</button>
+    <div id="progress_Status">
+
+      {{#if exportsIsExist}}
+        <h3>Liste des exports</h3>
+      {{else}}
+        <h3>Liste des exports vide, veuillez exporter</h3>
+      {{/if}}
+
+      {{#each export in exports}}
+      <div class="myprogressBar" style="width: 0px" id="{{export.myProgressBarId}}">
+        <a id="{{export.urlId}}" href="{{export.url}}" style="visibility: hidden"
+          >{{export.url}}</a
+        >
+      </div>
+      {{/each}}
+  </div>
+</template>
