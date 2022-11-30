@@ -42,7 +42,7 @@ Template.tp_export.onCreated(function () {
 Template.tp_export.helpers({
   exports() {
     let exports = Exports.find().fetch()
-    Template.instance().exportsIsExist.set(exports.length > 0 ? true : false);
+    Template.instance().exportsIsExist.set(exports.length > 0 ? true : false); // Affiche un message different si le tableau d'export est vide
     return exports
   },
   idCount() {
@@ -57,17 +57,20 @@ Template.tp_export.events({
   async "click .js-add-export"(event, instance) {
     Template.instance().idCount.set(Template.instance().idCount.get() + 1);
 
+    // Création d'un ID unique pour manipuler les balises
     let idCountStr = Template.instance().idCount.get().toString()
     let myProgressBarId= 'myProgressBarId-' + idCountStr
     let urlId= 'urlId-' + idCountStr
+
+    // BDD
     let exportDocument = {
       url: randomUrlWheel(),
       myProgressBarId: myProgressBarId,
       urlId: urlId
     }
-
     await Exports.insert(exportDocument)
 
+    // JQuery Selectors
     let myProgressBarSelector = instance.$("#"+myProgressBarId)
     let urlIdSelector = instance.$("#"+urlId)
 
