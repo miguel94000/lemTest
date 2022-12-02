@@ -8,6 +8,7 @@ import "./main.html";
  * Variable global
  */
 const oldExportList = [];
+const exportDocumentTab = [];
 
 /**
  * Choisie au hasard l'URL
@@ -42,6 +43,7 @@ async function countdown(myProgressBarSelector) {
 Template.tp_export.onCreated(function () {
   this.idCount = ReactiveVar(0);
   this.exportsIsExist = ReactiveVar(false);
+  this.exportList = ReactiveVar([]);
 });
 
 Template.tp_export.helpers({
@@ -49,6 +51,9 @@ Template.tp_export.helpers({
     let exports = Exports.find().fetch();
     Template.instance().exportsIsExist.set(exports.length > 0 ? true : false); // Affiche un message different si le tableau d'export est vide
     return exports;
+  },
+  exportList(){
+    return Template.instance().exportList.get()
   },
   idCount() {
     return Template.instance().idCount.get();
@@ -83,16 +88,22 @@ Template.tp_export.events({
     Template.instance().idCount.set(Template.instance().idCount.get() + 1);
 
     // Création d'un ID unique pour manipuler les balises
-    let idCountStr = Template.instance().idCount.get().toString();
+    let idCountStr = instance.idCount.get().toString();
     let myProgressBarId = "myProgressBarId-" + idCountStr;
     let urlId = "urlId-" + idCountStr;
 
-    // BDD
+    // Creation de l'objet
     let exportDocument = {
       url: randomUrlWheel(),
       myProgressBarId: myProgressBarId,
       urlId: urlId,
     };
+    
+    // Ajout en BDD
     await Exports.insert(exportDocument);
+
+    // Ajout Variable du template
+    exportDocumentTab.push(exportDocument)
+    instance.exportList.set(exportDocumentTab)
   },
 });

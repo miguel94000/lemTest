@@ -18,7 +18,19 @@
         <h3>Liste des exports vide, veuillez exporter</h3>
       {{/if}}
 
-      {{#each export in exports}}
+      <!-- Test avec BDD -->
+
+      <!-- {{#each export in exports}}
+      <div class="myprogressBar" style="width: 0px" id="{{export.myProgressBarId}}">
+        <a id="{{export.urlId}}" href="{{export.url}}" style="visibility: hidden"
+          >{{export.url}}</a
+        >
+      </div>
+      {{startLoading export.myProgressBarId export.urlId}}
+      {{/each}} -->
+
+      <!-- Test sans BDD -->
+      {{#each export in exportList}}
       <div class="myprogressBar" style="width: 0px" id="{{export.myProgressBarId}}">
         <a id="{{export.urlId}}" href="{{export.url}}" style="visibility: hidden"
           >{{export.url}}</a
